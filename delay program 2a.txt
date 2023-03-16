@@ -1,0 +1,45 @@
+delay calculations
+
+crystal frequency : 11.0592MHZ
+ clock frequency f=11.0592/12=0.9216MHZ
+
+time period of clock (T) = 1/f=1/0.9216MHZ
+ T=1.085 msecs
+to get delay of specific time (say/sec):
+the loop should be executed n times 
+
+n=delay time in msec/clock time in Msec 
+
+n=1000msec/1.085msec = 921.658
+
+data to be loaded in timer:
+
+data  
+=ffff-921.653
+=65536-921.653=64614.34
+=fc65H
+set TL = 65 and TH  =FCH 
+
+
+#include<reg51.h>
+void delay(void);
+void main(void)
+{
+while(1)
+{
+P0=0xff;
+delay();
+P0=0x00;
+delay();
+}
+}
+void delay()
+{
+TMOD=0x00;
+TL0=0x65;
+TH0=0xfc;
+TR0=1;
+while(TF0==1);
+ TR0=0;
+ TF0=0;
+}

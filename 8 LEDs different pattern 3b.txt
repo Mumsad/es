@@ -1,0 +1,23 @@
+Expt3b
+B To interface 8 LEDs at Input-output port and create different patterns
+
+
+
+#include<reg51.h>
+void delay(unsigned int t);
+void main(void)
+{
+while(1)
+{
+P1=0xAA;
+delay(100);
+P1=0x55;
+delay(100);
+}
+}
+void delay(unsigned int t)
+{
+unsigned int i,j;
+for(i=0;i<=t;i++)
+for(j=0;j<=1275;j++);
+}
